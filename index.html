@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genius Test - Определитель типа личности</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #4A00E0, #8E2DE2);
+            color: white;
+            padding: 25px 20px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .brand {
+            margin-bottom: 15px;
+        }
+        
+        .brand-name {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+        
+        .brand-tagline {
+            font-size: 1.4rem;
+            font-weight: 300;
+            opacity: 0.9;
+            letter-spacing: 2px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .progress-container {
+            background-color: #f0f0f0;
+            height: 8px;
+            width: 100%;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #4A00E0, #8E2DE2);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .screen {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            border-color: #8E2DE2;
+            background-color: #f8f6ff;
+        }
+        
+        .option.selected {
+            border-color: #4A00E0;
+            background-color: #f0ebff;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .prev-btn {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .prev-btn:hover:not(:disabled) {
+            background-color: #e0e0e0;
+        }
+        
+        .next-btn, #restart-btn, #submit-btn, #start-btn, .task-btn, .back-btn, #email-submit-btn {
+            background: linear-gradient(to right, #4A00E0, #8E2DE2);
+            color: white;
+        }
+        
+        .next-btn:hover, #restart-btn:hover, #submit-btn:hover, #start-btn:hover, .task-btn:hover, .back-btn:hover, #email-submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4A00E0;
+            text-align: center;
+        }
+        
+        .result-type {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .dynamo {
+            color: #FF4081;
+            background-color: #FFF0F5;
+        }
+        
+        .blaze {
+            color: #FF9800;
+            background-color: #FFF3E0;
+        }
+        
+        .tempo {
+            color: #4CAF50;
+            background-color: #F1F8E9;
+        }
+        
+        .steel {
+            color: #2196F3;
+            background-color: #E3F2FD;
+        }
+        
+        .result-description {
+            text-align: left;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-list {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        
+        .result-list li {
+            margin-bottom: 10px;
+        }
+        
+        .email-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .email-input {
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .email-input:focus {
+            border-color: #4A00E0;
+            outline: none;
+        }
+        
+        .email-description {
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .email-success {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4A00E0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .brand-name {
+                font-size: 2.2rem;
+            }
+            
+            .brand-tagline {
+                font-size: 1.1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            button {
+                padding: 10px 20px;
+            }
+            
+            .email-input {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="brand-name">Dmitry Surkov</div>
+                <div class="brand-tagline">Full-Potential</div>
+            </div>
+            <h1>Genius Test</h1>
+            <p class="subtitle">Определитель типа личности по модели Роджера Хамиллтона</p>
+        </header>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="content">
+            <!-- ЭКРАН ВВОДА EMAIL -->
+            <div id="email-screen" class="screen active">
+                <div class="email-section">
+                    <h2 class="question">Для получения результатов теста</h2>
+                    <p class="email-description">
+                        Введите ваш email, чтобы мы отправили вам персональный отчет с вашим типом личности
+                    </p>
+                    <input type="email" id="user-email" class="email-input" placeholder="ваш@email.com" required>
+                    <div>
+                        <button id="email-submit-btn" onclick="startTest()">Начать тест</button>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                        Ваши данные защищены и не будут переданы третьим лицам
+                    </p>
+                </div>
+            </div>
+            
+            <!-- ЭКРАН ПРИВЕТСТВИЯ -->
+            <div id="intro-screen" class="screen">
+                <h2 class="question">Добро пожаловать в Genius Test!</h2>
+                <p>Этот тест поможет определить ваш тип личности по модели Роджера Хамиллтона. Ответьте на 6 вопросов, выбрав наиболее подходящий для вас вариант.</p>
+                <p>Не задумывайтесь слишком долго, полагайтесь на первую реакцию.</p>
+                <div class="navigation">
+                    <button id="start-btn">Начать тест</button>
+                </div>
+            </div>
+            
+            <!-- ВОПРОСЫ 1-6 -->
+            <div id="question-1" class="screen">
+                <h3 class="question">1. На вечеринке или крупном корпоративном мероприятии вы, скорее всего:</h3>
+                <div class="options">
+                    <div class="option" data-value="blaze">Общаетесь с разными людьми, заряжаясь энергией от толпы, легко переключаясь между группами.</div>
+                    <div class="option" data-value="tempo">Находите одного-двух человек и ведете с ними глубокий, содержательный разговор.</div>
+                    <div class="option" data-value="steel">Наблюдаете за происходящим, анализируете динамику группы и чувствуете общую атмосферу.</div>
+                    <div class="option" data-value="dynamo">Замечаете практические детали: накрыт ли стол, всем ли удобно, как организовано мероприятие.</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('intro-screen')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-2')" disabled>Далее</button>
+                </div>
+            </div>
+            
+            <div id="question-2" class="screen">
+                <h3 class="question">2. Когда перед вами стоит большая и сложная задача, ваша первая реакция — это:</h3>
+                <div class="options">
+                    <div class="option" data-value="blaze">Немедленно начать действовать, "войти в воду", чтобы почувствовать процесс.</div>
+                    <div class="option" data-value="tempo">Сначала составить детальный план, разбить все на маленькие шаги и понять последовательность.</div>
+                    <div class="option" data-value="steel">Отступить на шаг, чтобы увидеть картину в целом, понять, как эта задача связана с более крупными целями.</div>
+                    <div class="option" data-value="dynamo">Погрузиться в размышления, представить идеальный результат и сгенерировать несколько творческих путей решения.</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-1')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-3')" disabled>Далее</button>
+                </div>
+            </div>
+            
+            <div id="question-3" class="screen">
+                <h3 class="question">3. Что для вас важнее в работе или проекте?</h3>
+                <div class="options">
+                    <div class="option" data-value="blaze">Свобода действовать и быстро видеть результат.</div>
+                    <div class="option" data-value="tempo">Четкие инструкции, надежные процессы и точность.</div>
+                    <div class="option" data-value="steel">Возможность вдохновлять команду и работать вместе для достижения общей цели.</div>
+                    <div class="option" data-value="dynamo">Возможность глубоко погрузиться в тему и создать что-то по-настоящему инновационное.</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-2')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-4')" disabled>Далее</button>
+                </div>
+            </div>
+            
+            <div id="question-4" class="screen">
+                <h3 class="question">4. Ваша суперсила в команде — это способность:</h3>
+                <div class="options">
+                    <div class="option" data-value="blaze">Легко устанавливать контакты и мотивировать людей.</div>
+                    <div class="option" data-value="tempo">Обеспечивать стабильность, выполнять обещания и доводить все до конца.</div>
+                    <div class="option" data-value="steel">Видеть неочевидные связи, продумывать многоходовую стратегию.</div>
+                    <div class="option" data-value="dynamo">Видеть будущее и предлагать свежие, оригинальные идеи.</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-3')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-5')" disabled>Далее</button>
+                </div>
+            </div>
+            
+            <div id="question-5" class="screen">
+                <h3 class="question">5. Что вас истощает больше всего?</h3>
+                <div class="options">
+                    <div class="option" data-value="blaze">Длительная монотонная работа в одиночестве без общения.</div>
+                    <div class="option" data-value="tempo">Хаос, неопределенность и отсутствие четкого плана.</div>
+                    <div class="option" data-value="steel">Необходимость сосредотачиваться на мелких, незначительных деталях.</div>
+                    <div class="option" data-value="dynamo">Постоянные отвлечения и необходимость "носить много шляк" одновременно, не имея времени на глубокую концентрацию.</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-4')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-6')" disabled>Далее</button>
+                </div>
+            </div>
+            
+            <div id="question-6" class="screen">
+                <h3 class="question">6. Принимая важное решение, вы в основном полагаетесь на:</h3>
+                <div class="options">
+                    <div class="option" data-value="blaze">Интуицию и "внутреннее чутье".</div>
+                    <div class="option" data-value="tempo">Логику, данные и проверенные факты.</div>
+                    <div class="option" data-value="steel">Советы и мнения trusted людей из вашего окружения.</div>
+                    <div class="option" data-value="dynamo">Собственный анализ всех "за" и "против" и долгосрочные последствия.</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-5')">Назад</button>
+                    <button id="submit-btn" onclick="showResult()" disabled>Узнать результат</button>
+                </div>
+            </div>
+            
+            <!-- ЭКРАН РЕЗУЛЬТАТА -->
+            <div id="result-screen" class="screen">
+                <div class="loading" id="email-loading">
+                    <div class="spinner"></div>
+                    <p>Отправляем результаты на вашу почту...</p>
+                </div>
+                
+                <div class="email-success" id="email-success" style="display: none;">
+                    <h3>✅ Результаты отправлены на вашу почту!</h3>
+                    <p>Проверьте папку "Входящие" или "Спам"</p>
+                </div>
+
+                <h2 class="result-title">Ваш тип личности:</h2>
+                <div id="result-type" class="result-type"></div>
+                <div id="result-description" class="result-description"></div>
+                
+                <div class="navigation" style="justify-content: center; margin-top: 30px; gap: 15px; flex-wrap: wrap;">
+                    <button id="restart-btn" onclick="restartTest()">Пройти тест снова</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+        let userEmail = '';
+        let currentUserType = '';
+
+        // ФУНКЦИЯ СТАРТА ТЕСТА ПОСЛЕ ВВОДА EMAIL
+        function startTest() {
+            const emailInput = document.getElementById('user-email');
+            const email = emailInput.value.trim();
+            
+            if (!validateEmail(email)) {
+                alert('Пожалуйста, введите корректный email адрес');
+                return;
+            }
+            
+            userEmail = email;
+            console.log('Email пользователя:', email);
+            
+            // Переходим к тесту
+            showScreen('intro-screen');
+        }
+
+        // ВАЛИДАЦИЯ EMAIL
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // ОТПРАВКА РЕЗУЛЬТАТОВ НА EMAIL
+        async function sendResultsToEmail(userEmail, userType, typeInfo) {
+            const loadingElement = document.getElementById('email-loading');
+            const successElement = document.getElementById('email-success');
+            
+            // Показываем загрузку
+            loadingElement.style.display = 'block';
+            
+            try {
+                // Отправка через EmailJS
+                await sendWithEmailJS(userEmail, userType, typeInfo);
+                
+                // Показываем успех
+                loadingElement.style.display = 'none';
+                successElement.style.display = 'block';
+                
+                console.log('Результаты отправлены на:', userEmail);
+                
+            } catch (error) {
+                loadingElement.style.display = 'none';
+                console.error('Ошибка отправки:', error);
+                alert('Произошла ошибка при отправке. Результаты сохранены на этой странице.');
+            }
+        }
+
+        // ОТПРАВКА ЧЕРЕЗ EMAILJS
+        async function sendWithEmailJS(userEmail, userType, typeInfo) {
+            const serviceID = 'service_aiudw5u';
+            const templateID = 'template_hqlg8zh';
+            const publicKey = 'wA3AYGAYf4tAtyySL';
+            
+            const templateParams = {
+                to_email: userEmail,
+                user_type: typeInfo.name,
+                type_description: typeInfo.description,
+                strengths: typeInfo.strengths.join(', '),
+                growth: typeInfo.growth,
+                motto: typeInfo.motto
+            };
+            
+            return await emailjs.send(serviceID, templateID, templateParams, publicKey);
+        }
+
+        // МОДИФИЦИРОВАННАЯ ФУНКЦИЯ ПОКАЗА РЕЗУЛЬТАТА
+        function showResult() {
+            const counts = { dynamo: 0, blaze: 0, tempo: 0, steel: 0 };
+            
+            for (let i = 1; i <= 6; i++) {
+                if (answers[i]) {
+                    counts[answers[i]]++;
+                }
+            }
+            
+            let maxType = '';
+            let maxCount = 0;
+            
+            for (const type in counts) {
+                if (counts[type] > maxCount) {
+                    maxCount = counts[type];
+                    maxType = type;
+                }
+            }
+            
+            currentUserType = maxType;
+            const typeInfo = typeDescriptions[maxType];
+            
+            // ПОКАЗЫВАЕМ РЕЗУЛЬТАТ НА САЙТЕ
+            const resultTypeElement = document.getElementById('result-type');
+            const resultDescriptionElement = document.getElementById('result-description');
+            
+            resultTypeElement.className = 'result-type ' + maxType;
+            resultTypeElement.textContent = typeInfo.name;
+            
+            let descriptionHTML = `
+                <p><strong>Описание:</strong> ${typeInfo.description}</p>
+                <p><strong>Ваши сильные стороны:</strong></p>
+                <ul class="result-list">
+            `;
+            
+            typeInfo.strengths.forEach(strength => {
+                descriptionHTML += `<li>${strength}</li>`;
+            });
+            
+            descriptionHTML += `
+                </ul>
+                <p><strong>Зона роста:</strong> ${typeInfo.growth}</p>
+                <p><strong>Ваш девиз:</strong> "${typeInfo.motto}"</p>
+            `;
+            
+            resultDescriptionElement.innerHTML = descriptionHTML;
+            
+            // ОТПРАВЛЯЕМ РЕЗУЛЬТАТ НА EMAIL
+            sendResultsToEmail(userEmail, maxType, typeInfo);
+            
+            showScreen('result-screen');
+        }
+
+        // ОПРЕДЕЛЕНИЯ ТИПОВ ЛИЧНОСТИ
+        const answers = {
+            1: null, 2: null, 3: null, 4: null, 5: null, 6: null
+        };
+
+        const typeDescriptions = {
+            dynamo: {
+                name: "Dynamo (Создатель)",
+                description: "Вы генератор идей. Вы видите возможности там, где другие видют пустое место. Вы мыслите нестандартно и создаете будущее из своего внутреннего видения.",
+                strengths: [
+                    "Инновации, творчество, прорывные продукты и стратегии",
+                    "Способность видеть общую картину и будущие возможности",
+                    "Независимое мышление и оригинальность"
+                ],
+                growth: "Вам может не хватать последовательности и внимания к деталям. Ваши гениальные идеи могут так и остаться идеями, если не найти команду для их реализации.",
+                motto: "А что, если...?"
+            },
+            blaze: {
+                name: "Blaze (Коммуникатор)",
+                description: "Вы мастер отношений. Вы легко общаетесь, вдохновляете и объединяете людей. Ваша энергия заразительна, вы создаете мощные сети и чувствуете потребности коллектива.",
+                strengths: [
+                    "Лидерство, мотивация, продажи, создание сообщества и бренда",
+                    "Отличные коммуникативные навыки и эмпатия",
+                    "Способность создавать и поддерживать широкую сеть контактов"
+                ],
+                growth: "Вам может быть сложно сосредоточиться на одной задаче, вы можете быть слишком зависимы от внешней обратной связи и распылять свою энергию.",
+                motto: "Давайте сделаем это вместе!"
+            },
+            tempo: {
+                name: "Tempo (Хранитель)",
+                description: "Вы основа стабильности. Вы надежны, последовательны и внимательны к деталям. Вы создаете структуру, порядок и доводите все до совершенства. На вас можно положиться.",
+                strengths: [
+                    "Надежность, качество, исполнение, создание устойчивых систем",
+                    "Внимание к деталям и тщательность в работе",
+                    "Способность поддерживать стабильность и порядок"
+                ],
+                growth: "Вы можете сопротивляться изменениям, слишком зацикливаться на деталях и избегать риска, даже когда он оправдан.",
+                motto: "Тише едешь — дальше будешь."
+            },
+            steel: {
+                name: "Steel (Стратег)",
+                description: "Вы аналитик и стратег. Вы мыслите логически, любите данные и факты. Вы видите, как устроены системы, и можете их оптимизировать для достижения максимальной эффективности и результата.",
+                strengths: [
+                    "Аналитика, эффективность, стратегическое планирование",
+                    "Логическое мышление и способность работать с данными",
+                    "Достижение измеримых целей и оптимизация процессов"
+                ],
+                growth: "Иногда вы можете казаться слишком холодным, бесчувственным или занудным, слишком полагаясь на логику и упуская человеческий фактор.",
+                motto: "Что говорят цифры?"
+            }
+        };
+
+        // ФУНКЦИИ ДЛЯ РАБОТЫ С ЭКРАНАМИ
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            updateProgressBar(screenId);
+        }
+
+        function updateProgressBar(screenId) {
+            const progressBar = document.getElementById('progress-bar');
+            if (screenId === 'email-screen') {
+                progressBar.style.width = '0%';
+            } else if (screenId === 'intro-screen') {
+                progressBar.style.width = '0%';
+            } else if (screenId.startsWith('question-')) {
+                const questionNum = parseInt(screenId.split('-')[1]);
+                const progress = (questionNum / 6) * 100;
+                progressBar.style.width = `${progress}%`;
+            } else if (screenId === 'result-screen') {
+                progressBar.style.width = '100%';
+            }
+        }
+
+        // ИНИЦИАЛИЗАЦИЯ
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionElement = this.closest('.screen');
+                    const questionId = questionElement.id;
+                    const questionNum = parseInt(questionId.split('-')[1]);
+                    
+                    questionElement.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    this.classList.add('selected');
+                    answers[questionNum] = this.getAttribute('data-value');
+                    
+                    const nextButton = questionElement.querySelector('.next-btn') || document.getElementById('submit-btn');
+                    nextButton.disabled = false;
+                });
+            });
+
+            document.getElementById('start-btn').addEventListener('click', function() {
+                showScreen('question-1');
+            });
+        });
+
+        function restartTest() {
+            for (let i = 1; i <= 6; i++) {
+                answers[i] = null;
+            }
+            
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('.next-btn').forEach(btn => {
+                btn.disabled = true;
+            });
+            document.getElementById('submit-btn').disabled = true;
+            
+            document.getElementById('email-success').style.display = 'none';
+            showScreen('email-screen');
+        }
+    </script>
+
+    <!-- Подключение EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init('wA3AYGAYf4tAtyySL');
+    </script>
+</body>
+</html>
