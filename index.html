@@ -10,6 +10,12 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
         body {
@@ -124,6 +130,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             background: #fff;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .option:hover {
@@ -131,6 +138,11 @@
             background-color: #f8f6ff;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(142, 45, 226, 0.1);
+        }
+        
+        .option:active {
+            transform: translateY(0);
+            transition: transform 0.1s ease;
         }
         
         .option.selected {
@@ -155,6 +167,13 @@
             font-weight: 600;
             transition: all 0.3s ease;
             flex: 1;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
         }
         
         .prev-btn {
@@ -262,11 +281,12 @@
             text-align: center;
             transition: all 0.3s ease;
             background: #fff;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
         }
         
         .email-input:focus {
             border-color: #4A00E0;
-            outline: none;
             box-shadow: 0 0 0 3px rgba(74, 0, 224, 0.1);
             transform: translateY(-2px);
         }
@@ -318,6 +338,13 @@
             transition: all 0.3s ease;
             margin-bottom: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+        }
+
+        .sales-module:active {
+            transform: scale(0.99);
+            transition: transform 0.1s ease;
         }
 
         .sales-module:hover {
@@ -348,6 +375,7 @@
             border-radius: 16px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             border: 2px solid #f8f6ff;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .bonus-icon {
@@ -377,6 +405,13 @@
             margin: 0 auto;
             box-shadow: 0 8px 25px rgba(74, 0, 224, 0.4);
             font-weight: 700;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
         }
 
         .cta-button:hover {
@@ -393,6 +428,7 @@
             padding: 25px;
             border-radius: 16px;
             margin: 20px 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .book-cover {
@@ -424,6 +460,7 @@
             padding: 25px;
             border-radius: 16px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .module-card h5 {
@@ -438,6 +475,14 @@
             font-size: 0.9rem;
             opacity: 0.9;
             line-height: 1.5;
+        }
+        
+        /* Отключаем выделение текста для кликабельных элементов */
+        .clickable {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
         @media (max-width: 768px) {
@@ -544,6 +589,16 @@
             .price-tag {
                 font-size: 2rem;
             }
+        }
+
+        /* Отключаем blue highlight на iOS */
+        input, textarea, button, select, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Плавные переходы для всех интерактивных элементов */
+        .option, button, .sales-module, .cta-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
@@ -738,7 +793,7 @@
                         <h3 style="text-align: center; color: #4A00E0; margin-bottom: 30px; font-size: 1.8rem;">Что вы получите в системе:</h3>
                         
                         <!-- Модуль 1 -->
-                        <div class="sales-module" onclick="toggleModule('module1')" style="cursor: pointer;">
+                        <div class="sales-module clickable" onclick="toggleModule('module1')">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center;">
                                     <div class="module-number">1</div>
@@ -759,7 +814,7 @@
                                     </div>
                                     <div class="module-card">
                                         <h5>💼 Идеальные сферы для реализации</h5>
-                                        <p>В каких профессиях и направлениях ваш тип личности раскрывается лучше всего и как легко в них войти, используя ваши природные склонности</p>
+                                        <p>В каких сфера деятельности и направлениях ваш тип личности раскрывается лучше всего и как легко в них войти, используя ваши природные склонности</p>
                                     </div>
                                     <div class="module-card">
                                         <h5>🚫 Зоны риска и пустых трат</h5>
@@ -774,7 +829,7 @@
                         </div>
 
                         <!-- Модуль 2 -->
-                        <div class="sales-module" onclick="toggleModule('module2')" style="cursor: pointer; margin-top: 20px;">
+                        <div class="sales-module clickable" onclick="toggleModule('module2')" style="margin-top: 20px;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center;">
                                     <div class="module-number">2</div>
@@ -791,7 +846,7 @@
                                 <div class="module-grid">
                                     <div class="module-card">
                                         <h5>👑 Ваши ориентиры для роста</h5>
-                                        <p>Конкретные люди вашего типа, которые уже добились выдающихся успехов - кого стоит изучать и на кого равняться для максимально быстрого развития</p>
+                                        <p>Конкретные люди вашего типа, которые уже добились выдающихся успехов - кого стоит слушать, читать и изучать для максимально быстрого развития</p>
                                     </div>
                                     <div class="module-card">
                                         <h5>🌱 Идеальная среда для развития</h5>
@@ -806,7 +861,7 @@
                         </div>
 
                         <!-- Модуль 3 -->
-                        <div class="sales-module" onclick="toggleModule('module3')" style="cursor: pointer; margin-top: 20px;">
+                        <div class="sales-module clickable" onclick="toggleModule('module3')" style="margin-top: 20px;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center;">
                                     <div class="module-number">3</div>
@@ -904,7 +959,7 @@
                         </button>
 
                         <p style="margin-top: 20px; color: #666; font-size: 0.9rem; line-height: 1.5;">
-                            🔒 Ваши данные защищены.
+                            🔒 Ваши данные защищены. Гарантия возврата 14 дней.
                         </p>
                     </div>
                 </div>
