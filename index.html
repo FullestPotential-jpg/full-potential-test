@@ -1069,7 +1069,7 @@
                     <div style="margin: 40px 0;">
                         <h3 style="text-align: center; color: #4A00E0; margin-bottom: 30px; font-size: 1.8rem;">Что вы получите в системе:</h3>
                         
-                        <div class="sales-module" onclick="toggleModule('module1')">
+                        <div class="sales-module" onclick="toggleSalesModule('module1')">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center;">
                                     <div class="module-number">1</div>
@@ -1311,7 +1311,18 @@
                 arrow.innerHTML = '▶';
             }
         }
-
+function toggleSalesModule(moduleId) {
+    const content = document.getElementById(moduleId + '-content');
+    const arrow = document.getElementById(moduleId + '-arrow');
+    
+    if (content.style.display === 'none' || !content.style.display) {
+        content.style.display = 'block';
+        arrow.innerHTML = '▼';
+    } else {
+        content.style.display = 'none';
+        arrow.innerHTML = '▶';
+    }
+}
         function purchaseCourse() {
             alert('Спасибо за интерес! Система оплаты находится в разработке. С вами свяжутся для оформления заказа.');
         }
