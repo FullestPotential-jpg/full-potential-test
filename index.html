@@ -700,32 +700,40 @@
             }
 
             .personality-type-btn {
-    padding: 12px 20px;
-    font-size: 0.9rem;
-}
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
 
-/* Вертикальное расположение кнопок типов личности */
-.personality-types-container {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 20px 0;
-}
+            /* ВЕРТИКАЛЬНОЕ РАСПОЛОЖЕНИЕ КНОПОК ТИПОВ ЛИЧНОСТИ */
+            .personality-types-container {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin: 20px 0;
+            }
 
-.personality-type-btn {
-    padding: 12px 15px;
-    font-size: 0.9rem;
-    text-align: center;
-    border-radius: 10px;
-    margin: 0;
-}
+            .personality-type-btn {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+                text-align: center;
+                border-radius: 10px;
+                margin: 0;
+            }
 
-/* Уменьшаем заголовки */
-.personality-types-container h3 {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    text-align: center;
-}
+            /* Уменьшаем заголовки */
+            .personality-types-container h3 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+
+            /* Адаптируем навигацию модулей */
+            .module-navigation {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
 
         @media (max-width: 480px) {
             .brand-name {
@@ -751,6 +759,16 @@
             
             .price-tag {
                 font-size: 2rem;
+            }
+
+            .personality-type-btn {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .module-nav-btn {
+                padding: 12px;
+                font-size: 1rem;
             }
         }
 
@@ -955,7 +973,7 @@
                     
                     <div style="margin: 30px 0;">
                         <h3 style="color: white; margin-bottom: 15px;">Выберите ваш тип личности:</h3>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                        <div class="personality-types-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
                             <button class="personality-type-btn active" onclick="selectPersonalityType('dynamo')">Творческий</button>
                             <button class="personality-type-btn" onclick="selectPersonalityType('blaze')">Коммуникабельный</button>
                             <button class="personality-type-btn" onclick="selectPersonalityType('tempo')">Стабильный</button>
