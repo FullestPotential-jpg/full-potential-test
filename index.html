@@ -700,10 +700,32 @@
             }
 
             .personality-type-btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-        }
+    padding: 12px 20px;
+    font-size: 0.9rem;
+}
+
+/* Вертикальное расположение кнопок типов личности */
+.personality-types-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.personality-type-btn {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0;
+}
+
+/* Уменьшаем заголовки */
+.personality-types-container h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
 
         @media (max-width: 480px) {
             .brand-name {
