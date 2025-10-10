@@ -490,6 +490,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(74, 0, 224, 0.3);
             -webkit-tap-highlight-color: transparent;
+            word-break: break-word;
         }
 
         .module-nav-btn:hover {
@@ -514,11 +515,12 @@
             background: linear-gradient(135deg, #4A00E0, #8E2DE2);
             color: white;
             border-radius: 15px;
-            padding: 25px;
+            padding: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(74, 0, 224, 0.3);
             -webkit-tap-highlight-color: transparent;
+            margin-bottom: 15px;
         }
 
         .submodule-card:hover {
@@ -529,23 +531,29 @@
         .submodule-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            gap: 10px;
         }
 
         .submodule-header h3 {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.3;
+            word-break: break-word;
+            flex: 1;
         }
 
         .submodule-arrow {
             font-size: 1.2rem;
             transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 10px;
         }
 
         .submodule-content {
             display: none;
-            margin-top: 20px;
-            padding-top: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
             border-top: 2px solid rgba(255,255,255,0.3);
         }
 
@@ -555,47 +563,60 @@
 
         .type-content {
             background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
         }
 
         .type-content h4 {
             color: #FFD700;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
         }
 
         .type-content ul {
-            margin: 10px 0;
-            padding-left: 20px;
+            margin: 8px 0;
+            padding-left: 18px;
         }
 
         .type-content li {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .type-content p {
+            font-size: 0.85rem;
+            line-height: 1.3;
+            margin-bottom: 6px;
         }
 
         .question-section, .action-plan, .interaction-guide, .persuasion-guide, .relationship-guide {
             background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
         }
 
         .question-section ol, .action-plan p {
-            margin: 10px 0;
+            margin: 8px 0;
+            font-size: 0.85rem;
+            line-height: 1.3;
         }
 
         .personality-type-btn {
-            padding: 15px 25px;
+            padding: 15px 10px;
             background: linear-gradient(135deg, #4A00E0, #8E2DE2);
             color: white;
             border: none;
             border-radius: 12px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            flex: 1;
+            word-break: break-word;
+            line-height: 1.2;
+            text-align: center;
         }
 
         .personality-type-btn.active {
@@ -607,7 +628,7 @@
             box-shadow: 0 8px 25px rgba(74, 0, 224, 0.4);
         }
 
-        /* Адаптация */
+        /* Адаптация для мобильных */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -619,7 +640,7 @@
             }
             
             header {
-                padding: 25px 15px 20px;
+                padding: 20px 15px;
             }
             
             .brand-name {
@@ -687,51 +708,80 @@
             }
 
             .module-nav-btn {
-                padding: 15px;
-                font-size: 1.1rem;
+                padding: 15px 10px;
+                font-size: 1rem;
             }
             
             .submodule-card {
-                padding: 20px;
+                padding: 15px;
             }
             
             .submodule-header h3 {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .personality-type-btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
+                padding: 12px 8px;
+                font-size: 0.85rem;
             }
 
-            /* ВЕРТИКАЛЬНОЕ РАСПОЛОЖЕНИЕ КНОПОК ТИПОВ ЛИЧНОСТИ */
+            /* Типы личности в 2 ряда (2x2) */
             .personality-types-container {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                margin: 20px 0;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 10px !important;
             }
 
-            .personality-type-btn {
-                padding: 12px 15px;
-                font-size: 0.9rem;
-                text-align: center;
-                border-radius: 10px;
-                margin: 0;
-            }
-
-            /* Уменьшаем заголовки */
-            .personality-types-container h3 {
-                font-size: 1.1rem;
-                margin-bottom: 15px;
-                text-align: center;
-            }
-
-            /* Адаптируем навигацию модулей */
+            /* Модули в виде пирамидки (1 сверху, 2 снизу) */
             .module-navigation {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
+                display: grid !important;
+                grid-template-areas: 
+                    "top top"
+                    "left right" !important;
+                gap: 10px !important;
+            }
+
+            .module-nav-btn:nth-child(1) {
+                grid-area: top;
+            }
+
+            .module-nav-btn:nth-child(2) {
+                grid-area: left;
+            }
+
+            .module-nav-btn:nth-child(3) {
+                grid-area: right;
+            }
+
+            /* Подмодули компактнее */
+            .submodule-content {
+                padding: 12px 0;
+            }
+
+            .type-content {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            .type-content h4 {
+                font-size: 0.9rem;
+            }
+
+            .type-content p, .type-content li {
+                font-size: 0.8rem;
+            }
+
+            /* Контент модулей адаптируем */
+            .module-section h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 20px !important;
+            }
+
+            /* Сетка для подмодулей на мобильных */
+            .module-section > div {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+                margin-top: 20px !important;
             }
         }
 
@@ -762,13 +812,35 @@
             }
 
             .personality-type-btn {
-                padding: 10px 12px;
-                font-size: 0.85rem;
+                padding: 10px 6px;
+                font-size: 0.8rem;
             }
             
             .module-nav-btn {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+
+            .submodule-card {
                 padding: 12px;
-                font-size: 1rem;
+            }
+
+            .submodule-header h3 {
+                font-size: 0.9rem;
+            }
+
+            .module-section h2 {
+                font-size: 1.3rem !important;
+            }
+
+            /* Еще более компактные подмодули */
+            .submodule-content {
+                padding: 10px 0;
+            }
+
+            .type-content {
+                padding: 8px;
+                margin-bottom: 8px;
             }
         }
 
@@ -982,13 +1054,13 @@
                     </div>
                 </header>
 
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0;">
+                <div class="module-navigation" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0;">
                     <button class="module-nav-btn active" onclick="showModule(1)">Модуль 1</button>
                     <button class="module-nav-btn" onclick="showModule(2)">Модуль 2</button>
                     <button class="module-nav-btn" onclick="showModule(3)">Модуль 3</button>
                 </div>
 
-                <div id="module-content" style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); min-height: 600px;">
+                <div id="module-content" style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); min-height: 600px;">
                     <!-- Содержимое модулей будет здесь -->
                 </div>
             </div>
@@ -1579,7 +1651,7 @@
                     </div>`,
                     persuasion: `<div class="type-content">
                         <h4>Творческий (Dynamo):</h4>
-                        <p><strong>Ваш стиль:</strong> Вдохновение через видение будущего</p>
+                        <p><strong>Ваш стиль:</strong> Вдохновление через видение будущего</p>
                         <p><strong>Ключевые фразы:</strong> "Представьте, если бы...", "Это изменит всё"</p>
                         <p><strong>Избегайте:</strong> Излишней детализации на старте</p>
                     </div>`,
