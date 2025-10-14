@@ -891,15 +891,16 @@
             
             <!-- ЭКРАН ПРИВЕТСТВИЯ -->
             <div id="intro-screen" class="screen">
-                <h2 class="question">Добро пожаловать в Определитель Типа Личности!
-                <p>Этот тест поможет определить ваш тип личности. Ответьте на 7 вопросов, выбрав наиболее подходящий для вас вариант.</p>
-                <p>Не задумывайтесь слишком долго, пологайтесь на первую реакцию, но взвешивайте каждый вопрос, чтобы выбрать максимально правильный ответ для вас.</p>
+                <h2 class="question">Добро пожаловать в Определитель Типа Личности!</h2>
+                <p>Этот тест поможет определить ваш тип личности. Ответьте на 12 вопросов, выбрав наиболее подходящий для вас вариант.</p>
+                <p><strong>Важно!</strong></p>
+<p>Не задумывайтесь слишком долго, полагайтесь на первую реакцию, но взвешивайте каждый вопрос, чтобы выбрать максимально правильный ответ для вас. Выбирайте ответы, которые лучше всего описывают ваше Естественное поведение в жизни.</p>
                 <div class="navigation">
                     <button id="start-btn">Начать тест</button>
                 </div>
             </div>
             
-            <!-- ВОПРОСЫ 1-7 -->
+                        <!-- ВОПРОСЫ 1-7 -->
             <div id="question-1" class="screen">
                 <h3 class="question">1. На вечеринке или крупном корпоративном мероприятии вы, скорее всего:</h3>
                 <div class="options">
@@ -984,7 +985,7 @@
                 </div>
             </div>
 
-            <!-- НОВЫЙ 7-Й ВОПРОС -->
+            <!-- ВОПРОС 7 -->
             <div id="question-7" class="screen">
                 <h3 class="question">7. Какой подход к жизни вам ближе всего?</h3>
                 <div class="options">
@@ -995,6 +996,81 @@
                 </div>
                 <div class="navigation">
                     <button class="prev-btn" onclick="showScreen('question-6')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-8')" disabled>Далее</button>
+                </div>
+            </div>
+
+            <!-- ВОПРОС 8 - Фокус на глубине работы -->
+            <div id="question-8" class="screen">
+                <h3 class="question">8. Когда вы работаете над задачей, что происходит чаще всего?</h3>
+                <div class="options">
+                    <div class="option" data-value="творческий">Увлекаюсь настолько, что забываю о времени и окружающих</div>
+                    <div class="option" data-value="коммуникабельный">Делаю перерывы, чтобы пообщаться с коллегами</div>
+                    <div class="option" data-value="стабильный">Работаю равномерно, соблюдая установленный график</div>
+                    <div class="option" data-value="технический">Анализирую каждый шаг, чтобы найти оптимальный способ</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-7')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-9')" disabled>Далее</button>
+                </div>
+            </div>
+
+            <!-- ВОПРОС 9 - Фокус на реакции на ошибки -->
+            <div id="question-9" class="screen">
+                <h3 class="question">9. Вы обнаружили ошибку в важном проекте. Ваши первые действия?</h3>
+                <div class="options">
+                    <div class="option" data-value="творческий">Ищу креативное решение, которое превратит ошибку в преимущество</div>
+                    <div class="option" data-value="коммуникабельный">Сразу сообщаю команде, чтобы вместе найти выход</div>
+                    <div class="option" data-value="стабильный">Тщательно проверяю все связанные процессы, чтобы найти корень проблемы</div>
+                    <div class="option" data-value="технический">Анализирую данные ошибки, чтобы понять системную причину</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-8')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-10')" disabled>Далее</button>
+                </div>
+            </div>
+
+            <!-- ВОПРОС 10 - Фокус на обучении -->
+            <div id="question-10" class="screen">
+                <h3 class="question">10. Как вы предпочитаете осваивать новые навыки?</h3>
+                <div class="options">
+                    <div class="option" data-value="творческий">Экспериментирую и пробую сразу на практике</div>
+                    <div class="option" data-value="коммуникабельный">Нахожу ментора или иду на групповой тренинг</div>
+                    <div class="option" data-value="стабильный">Следую четкой пошаговой инструкции</div>
+                    <div class="option" data-value="технический">Изучаю теорию и только потом перехожу к практике</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-9')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-11')" disabled>Далее</button>
+                </div>
+            </div>
+
+            <!-- ВОПРОС 11 - Фокус на принятии решений -->
+            <div id="question-11" class="screen">
+                <h3 class="question">11. Вам нужно принять сложное решение. На что вы опираетесь в первую очередь?</h3>
+                <div class="options">
+                    <div class="option" data-value="творческий">На внутреннее ощущение и интуицию</div>
+                    <div class="option" data-value="коммуникабельный">На мнение людей, которым доверяю</div>
+                    <div class="option" data-value="стабильный">На предыдущий опыт и проверенные методы</div>
+                    <div class="option" data-value="технический">На данные, статистику и логический анализ</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-10')">Назад</button>
+                    <button class="next-btn" onclick="showScreen('question-12')" disabled>Далее</button>
+                </div>
+            </div>
+
+            <!-- ВОПРОС 12 - Фокус на усталости -->
+            <div id="question-12" class="screen">
+                <h3 class="question">12. После чего вы чувствуете наибольшее истощение?</h3>
+                <div class="options">
+                    <div class="option" data-value="творческий">После долгой рутинной работы по инструкции</div>
+                    <div class="option" data-value="коммуникабельный">После дня, проведенного в одиночестве за компьютером</div>
+                    <div class="option" data-value="стабильный">После хаотичного дня без четкого плана</div>
+                    <div class="option" data-value="технический">После работы, где приходилось руководствоваться только эмоциями</div>
+                </div>
+                <div class="navigation">
+                    <button class="prev-btn" onclick="showScreen('question-11')">Назад</button>
                     <button id="submit-btn" onclick="showResult()" disabled>Узнать результат</button>
                 </div>
             </div>
@@ -1231,7 +1307,7 @@
         let userEmail = '';
         let currentUserType = '';
         let selectedPersonalityType = 'творческий';
-        const answers = {1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null};
+        const answers = {1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null, 9: null, 10: null, 11: null, 12: null};
 
         const typeDescriptions = {
             творческий: {
@@ -1292,24 +1368,24 @@
         }
 
         function updateProgressBar(screenId) {
-            const progressBar = document.getElementById('progress-bar');
-            if (screenId === 'email-screen') {
-                progressBar.style.width = '0%';
-            } else if (screenId === 'intro-screen') {
-                progressBar.style.width = '0%';
-            } else if (screenId.startsWith('question-')) {
-                const questionNum = parseInt(screenId.split('-')[1]);
-                const progress = (questionNum / 7) * 100;
-                progressBar.style.width = `${progress}%`;
-            } else if (screenId === 'result-screen') {
-                progressBar.style.width = '100%';
-            }
-        }
+    const progressBar = document.getElementById('progress-bar');
+    if (screenId === 'email-screen') {
+        progressBar.style.width = '0%';
+    } else if (screenId === 'intro-screen') {
+        progressBar.style.width = '0%';
+    } else if (screenId.startsWith('question-')) {
+        const questionNum = parseInt(screenId.split('-')[1]);
+        const progress = (questionNum / 12) * 100;  // Было 7, стало 12
+        progressBar.style.width = `${progress}%`;
+    } else if (screenId === 'result-screen') {
+        progressBar.style.width = '100%';
+    }
+}
 
         function showResult() {
             const counts = { творческий: 0, коммуникабельный: 0, стабильный: 0, технический: 0 };
             
-            for (let i = 1; i <= 7; i++) {
+            for (let i = 1; i <= 12; i++) {
                 if (answers[i]) counts[answers[i]]++;
             }
             
