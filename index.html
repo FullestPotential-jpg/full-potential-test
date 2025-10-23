@@ -1308,6 +1308,29 @@
         let currentUserType = '';
         let selectedPersonalityType = 'творческий';
         const answers = {1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null, 9: null, 10: null, 11: null, 12: null};
+let userEmail = '';
+let currentUserType = '';
+let selectedPersonalityType = 'творческий';
+const answers = {1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null, 9: null, 10: null, 11: null, 12: null};
+
+// === ДОБАВЬТЕ ЭТОТ КОД ЗДЕСЬ ===
+// ПРОВЕРКА РЕЖИМА СТРАНИЦЫ
+const urlParams = new URLSearchParams(window.location.search);
+const isProductPage = urlParams.get('page') === 'product';
+const isSalesPage = urlParams.get('page') === 'sales';
+
+// Сразу скрываем все и показываем нужную страницу
+document.getElementById('main-container').style.display = 'none';
+document.getElementById('product-page').style.display = 'none';
+document.getElementById('sales-page').style.display = 'none';
+
+if (isProductPage) {
+    showProductPage();
+} else if (isSalesPage) {
+    showSalesPage();
+} else {
+    document.getElementById('main-container').style.display = 'block';
+}
 
         const typeDescriptions = {
             творческий: {
@@ -2927,13 +2950,6 @@
             });
         });
 
-        // ГЛАВНАЯ ПРОВЕРКА URL
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('page') === 'product') {
-            showProductPage();
-        } else if (urlParams.get('page') === 'sales') {
-            showSalesPage();
-        }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
