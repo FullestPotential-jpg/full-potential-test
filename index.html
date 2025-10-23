@@ -1362,7 +1362,21 @@ if (isProductPage) {
                 motto: "Что говорят цифры?"
             }
         };
+        // ПРОВЕРКА РЕЖИМА СТРАНИЦЫ
+        const urlParams = new URLSearchParams(window.location.search);
+        const isProductPage = urlParams.get('page') === 'product';
+        const isSalesPage = urlParams.get('page') === 'sales';
 
+        // Сразу скрываем все и показываем нужную страницу
+        if (isProductPage) {
+            document.getElementById('main-container').style.display = 'none';
+            document.getElementById('sales-page').style.display = 'none';
+            document.getElementById('product-page').style.display = 'block';
+        } else if (isSalesPage) {
+            document.getElementById('main-container').style.display = 'none';
+            document.getElementById('product-page').style.display = 'none';
+            document.getElementById('sales-page').style.display = 'block';
+        }
         // ФУНКЦИИ ТЕСТА
         function startTest() {
             const emailInput = document.getElementById('user-email');
