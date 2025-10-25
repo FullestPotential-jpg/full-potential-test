@@ -2954,7 +2954,7 @@
                 }
             };
             
-            return contentMap[type]?.[category] || `<div class="type-content"><p>Контент для этого типа личности и категории находится в разработке</p></div>`;
+            return contentMap[type]?.[category] ?? `<div class="type-content"><p>Контент для этого типа личности и категории находится в разработке</p></div>`;
         }
 
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
