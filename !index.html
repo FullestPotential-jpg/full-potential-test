@@ -1491,17 +1491,19 @@
         }
 
         function toggleSubmodule(submoduleId) {
-            const content = document.getElementById(submoduleId);
-            const arrow = content.previousElementSibling.querySelector('.submodule-arrow');
-            
-            if (content.style.display === 'none' || !content.style.display) {
-                content.style.display = 'block';
-                arrow.innerHTML = '▼';
-            } else {
-                content.style.display = 'none';
-                arrow.innerHTML = '▶';
-            }
-        }
+    const content = document.getElementById(submoduleId);
+    const arrow = content.previousElementSibling.querySelector('.submodule-arrow');
+    
+    // Переключаем CSS класс
+    content.classList.toggle('active');
+    
+    // Обновляем стрелку
+    if (content.classList.contains('active')) {
+        arrow.innerHTML = '▼';
+    } else {
+        arrow.innerHTML = '▶';
+    }
+}
 
         function loadModuleContent(moduleNumber) {
             const moduleContent = document.getElementById('module-content');
@@ -2580,7 +2582,7 @@
                         <p><strong>Со Стабильным:</strong> Уважайте их потребность в порядке и предсказуемости</p>
                         <p><strong>С Техническим:</strong> Говорите конкретно, подкрепляйте эмоции фактами</p>
                     </div>`,
-                    persuasion: `<div class="type-content">
+                        persuasion: `<div class="type-content">
                         <h4>Стабильный (Tempo):</h4>
                         <p><strong>Ваш стиль:</strong> Убеждение через эмоции и личную историю</p>
                         <p><strong>Ключевые фразы:</strong> "Я понимаю ваши чувства", "Давайте сделаем это вместе"</p>
