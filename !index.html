@@ -2953,9 +2953,13 @@
 
                 }
             };
+const content = contentMap[type]?.[category];
+    if (content !== undefined && content !== null && content !== '') {
+        return content;
+    }
             
-            return contentMap[type]?.[category] ?? `<div class="type-content"><p>Контент для этого типа личности и категории находится в разработке</p></div>`;
-        }
+            return `<div class="type-content"><p>Контент для этого типа личности и категории находится в разработке</p></div>`;
+}
 
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
