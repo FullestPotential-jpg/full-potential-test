@@ -1654,11 +1654,6 @@
         }
 
       function getTypeSpecificContent(type, category) {
-    // ВРЕМЕННО: для ВСЕХ категорий стабильного и технического возвращаем тестовый контент
-    if (type === 'стабильный' || type === 'технический') {
-        return `<div class="type-content"><p>РАБОТАЕТ! ${type} - ${category}</p></div>`;
-    }
-
             const contentMap = {
                 творческий: {
                     strengths: `<div class="type-content">
@@ -2956,7 +2951,7 @@
                 }
             };
             
-            return contentMap[type]?.[category] || `<div class="type-content"><p>Контент для этого типа личности и категории находится в разработке</p></div>`;
+            return contentMap[type]?.[category];
 }
 
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
